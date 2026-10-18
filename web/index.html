@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Who Makes Money on Polymarket</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230d0d0d'/%3E%3Crect x='5' y='16' width='5' height='10' fill='%233987e5'/%3E%3Crect x='13.5' y='16' width='5' height='7' fill='%23d95926'/%3E%3Crect x='22' y='6' width='5' height='10' fill='%233987e5'/%3E%3Crect x='3' y='15.5' width='26' height='1' fill='%23ffffff'/%3E%3C/svg%3E">
+<style>
+:root{
+  color-scheme:dark;
+  --plane:#0d0d0d;--surface:#1a1a19;--surface-2:#232321;--ink:#fff;--ink-2:#c3c2b7;--muted:#898781;
+  --grid:#2c2c2a;--axis:#383835;--hair:rgba(255,255,255,.10);--quiet:#56554f;
+  /* data colours: profit and loss are a cool/warm pair (validated for the dark surface); grey is everything else */
+  --up:#3987e5;--down:#d95926;--rest:#6f6e68;
+  --brand:#c41e3a;
+  --sans:Bahnschrift,"DIN Alternate","Barlow","Segoe UI",system-ui,sans-serif;
+  --mono:"Cascadia Code","Cascadia Mono",Consolas,ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;min-height:100%;background:var(--plane);color:var(--ink);font:17px/1.42 var(--sans)}
+body{background:radial-gradient(1100px 380px at 12% -10%,#c41e3a1c,transparent 70%),repeating-linear-gradient(0deg,transparent 0 47px,#ffffff05 47px 48px),var(--plane);overflow-y:scroll}
+button{font:inherit;color:inherit}
+.label{font-size:13px;letter-spacing:1.3px;text-transform:uppercase;color:var(--muted);font-stretch:85%;font-weight:500}
+.src{font-family:var(--mono);font-size:12.5px;color:var(--muted);letter-spacing:-.2px}
+.src b{color:var(--ink-2);font-weight:400}
+.muted{color:var(--muted)}.ink2{color:var(--ink-2)}
+.num{font-variant-numeric:tabular-nums}
+
+header{display:flex;align-items:center;gap:16px;padding:15px 36px 13px;border-bottom:1px solid var(--hair);position:relative}
+header::after{content:"";position:absolute;left:36px;bottom:-1px;width:250px;height:2px;background:var(--brand)}
+.mark{width:40px;height:40px;border-radius:9px;background:#111;border:1px solid var(--hair);position:relative;flex:none}
+.mark i{position:absolute;width:6px;border-radius:1px}
+.mark i:nth-child(1){left:8px;bottom:19px;height:13px;background:var(--up)}.mark i:nth-child(2){left:17px;top:21px;height:9px;background:var(--down)}.mark i:nth-child(3){left:26px;bottom:19px;height:8px;background:var(--up)}
+.mark::after{content:"";position:absolute;left:5px;right:5px;top:19.5px;height:1px;background:#fff}
+h1{margin:0;font-size:27px;font-weight:600;letter-spacing:.2px;line-height:1.1}
+.tag{color:var(--ink-2);font-size:15px}
+.grow{flex:1}
+.pill{display:inline-flex;align-items:center;gap:9px;padding:7px 15px;border:1px solid var(--hair);border-radius:999px;background:var(--surface);font-size:15px;color:var(--ink-2);white-space:nowrap}
+.pill b{color:var(--ink);font-weight:600}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--muted)}
+
+nav{display:flex;gap:4px;padding:10px 36px 0;border-bottom:1px solid var(--hair);align-items:flex-end}
+nav button{background:none;border:0;border-bottom:3px solid transparent;padding:9px 18px 11px;color:var(--muted);cursor:pointer;font-size:17.5px;letter-spacing:.2px}
+nav button:hover{color:var(--ink-2)}
+nav button.on{color:var(--ink);border-color:var(--brand);font-weight:600}
+main{padding:14px 36px 40px}
+.empty{padding:80px 0;text-align:center;color:var(--ink-2);font-size:20px}
+.empty code{font-family:var(--mono);background:var(--surface);padding:4px 10px;border-radius:6px;border:1px solid var(--hair)}
+
+.filters{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+.seg{display:inline-flex;border:1px solid var(--hair);border-radius:10px;overflow:hidden;background:var(--surface)}
+.seg button{background:none;border:0;padding:8px 18px;cursor:pointer;color:var(--ink-2);font-size:16px;border-right:1px solid var(--hair)}
+.seg button:last-child{border-right:0}
+.seg button:hover{background:#ffffff0a}
+.seg button.on{background:#ffffff14;color:var(--ink);font-weight:600}
+.ghost{background:none;border:1px solid var(--hair);border-radius:10px;padding:8px 16px;cursor:pointer;color:var(--ink-2);font-size:15px}
+.ghost:hover{background:#ffffff0a;color:var(--ink)}
+
+.tiles{display:grid;gap:14px;margin-bottom:14px}
+.tile{background:var(--surface);border:1px solid var(--hair);border-radius:14px;padding:14px 20px 13px;min-width:0}
+.tile.lead{border-left:3px solid var(--brand)}
+.tile b{display:block;font-size:40px;font-weight:600;line-height:1.05;margin-top:9px;white-space:nowrap}
+.tile.lead b{font-size:54px}
+.tile b small{font-size:18px;color:var(--ink-2);font-weight:400;margin-left:6px}
+.tile .sub{display:block;color:var(--ink-2);font-size:15px;margin-top:7px}
+.tile .src{display:block;margin-top:6px}
+.meter{display:flex;gap:2px;height:12px;margin-top:10px}
+.meter i{display:block;height:12px;background:var(--up)}.meter i:first-child{background:var(--down);border-radius:4px 0 0 4px}.meter i:last-child{border-radius:0 4px 4px 0}
+
+.cards{display:grid;gap:14px}
+.card{background:var(--surface);border:1px solid var(--hair);border-radius:14px;padding:16px 20px 14px;min-width:0;position:relative}
+.card h2{margin:0;font-size:21px;font-weight:600;letter-spacing:.1px}
+.card .sub{color:var(--ink-2);font-size:15px;margin-top:3px}
+.card .src{margin-top:8px}
+.legend{display:flex;gap:18px;flex-wrap:wrap;margin-top:8px;font-size:14.5px;color:var(--ink-2)}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.key{display:inline-block;width:12px;height:12px;border-radius:2px}
+.key.ring{border-radius:50%;background:none!important;border:2.5px solid var(--ink-2)}
+.key.round{border-radius:50%}
+svg{display:block;overflow:visible}
+svg text{font-family:var(--sans);fill:var(--muted);font-size:13.5px}
+svg text.v{fill:var(--ink);font-size:15px;font-weight:600}
+svg text.n{fill:var(--ink-2);font-size:14.5px}
+svg .hit{fill:transparent;cursor:default}
+svg .dm{transition:opacity .12s}
+svg g.col:hover .dm,svg g.rowg:hover .dm{opacity:.72}
+
+table{width:100%;border-collapse:collapse;font-size:15.5px}
+th{font-size:12.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);font-weight:500;text-align:right;padding:8px 12px;border-bottom:1px solid var(--axis);white-space:nowrap}
+td{padding:9px 12px;border-bottom:1px solid var(--grid);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+td.l,th.l{text-align:left}
+tr:last-child td{border-bottom:0}
+td .w{font-family:var(--mono);font-size:14px;color:var(--ink-2);letter-spacing:-.2px}
+td .h{font-weight:600;margin-right:10px}
+.minus{color:#f0a27f}.plus{color:#8fbdf3}
+.bar{display:inline-block;height:10px;vertical-align:middle;border-radius:0 4px 4px 0;min-width:2px}
+.scroll{max-height:560px;overflow:auto}
+
+.tip{position:fixed;z-index:50;pointer-events:none;background:#101010f2;border:1px solid var(--axis);border-radius:10px;padding:10px 14px;font-size:14.5px;max-width:380px;box-shadow:0 12px 30px #0009;opacity:0;transition:opacity .1s}
+.tip.on{opacity:1}
+.tip strong{display:block;font-size:19px;font-weight:600}
+.tip span{display:block;color:var(--ink-2)}
+.tip .w{font-family:var(--mono);font-size:13px;color:var(--muted)}
+
+.steps{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.steps ol,.steps ul{margin:8px 0 0;padding-left:22px}
+.steps li{margin:7px 0;color:var(--ink-2)}
+.steps li b{color:var(--ink);font-weight:600}
+code{font-family:var(--mono);font-size:13.5px;color:var(--ink-2)}
+a.btn{display:inline-block;margin-top:10px;padding:9px 18px;border-radius:10px;background:var(--brand);color:#fff;text-decoration:none;font-weight:600;font-size:15.5px}
+.note{color:var(--ink-2);font-size:14.5px;margin-top:8px}
+.ticket{display:grid;grid-template-columns:1fr auto;gap:4px 18px;padding:9px 0;border-bottom:1px solid var(--grid);font-size:15.5px}
+.ticket:last-child{border-bottom:0}
+.ticket b{font-weight:600}.ticket span{color:var(--ink-2)}
+</style>
+</head>
+<body>
+<header>
+  <div class="mark"><i></i><i></i><i></i></div>
+  <div>
+    <h1>Who Makes Money on Polymarket</h1>
+    <div class="tag">Leaderboards, books and scored trades, read through Predictefy. Wallets, not people.</div>
+  </div>
+  <div class="grow"></div>
+  <span class="pill"><span class="dot"></span><span id="status">Loading…</span></span>
+  <span class="pill" id="costPill" hidden>This study cost <b id="costTotal">0</b> credits</span>
+</header>
+<nav id="tabs">
+  <button data-tab="boards" class="on">The two boards</button>
+  <button data-tab="windows">Four windows</button>
+  <button data-tab="books">What a book shows</button>
+  <button data-tab="ages">How new the winners are</button>
+  <button data-tab="entry">Scored buys (partial proxy)</button>
+  <button data-tab="method">Method and cost</button>
+</nav>
+<main id="main"><div class="empty">Loading…</div></main>
+<div class="tip" id="tip"></div>
+
+<script>
+'use strict';
+const WINDOW_NAMES = {day: 'Today', week: 'This week', month: 'This month', all: 'All time'};
+const GROUP_NAMES = {all: 'All labels', bot: 'Bot', whale: 'Whale', fresh: 'Fresh', fish: 'Fish', unclassified: 'No label'};
+const UPGRADE = 'https://predictefy.com/en/pricing?utm_source=youtube&utm_medium=video&utm_campaign=why-polymarket-traders-lose&utm_content=upgrade';
+const state = {tab: 'boards', window: 'month', group: 'all', table: false, data: null};
+const $ = selector => document.querySelector(selector);
+const NS = 'http://www.w3.org/2000/svg';
+
+// ---- formatting ----
+const usd = value => `${value < 0 ? '−' : ''}$${Math.round(Math.abs(value)).toLocaleString('en-US')}`;
+function compact(value) {
+  const a = Math.abs(value), sign = value < 0 ? '−' : '';
+  if (a >= 1e9) return `${sign}$${(a / 1e9).toFixed(2)}B`;
+  if (a >= 1e6) return `${sign}$${(a / 1e6).toFixed(a >= 1e8 ? 0 : 1)}M`;
+  if (a >= 1e3) return `${sign}$${(a / 1e3).toFixed(a >= 1e5 ? 0 : 1)}K`;
+  return `${sign}$${a.toFixed(0)}`;
+}
+const pct = (value, digits = 0) => `${(value * 100).toFixed(digits)}%`;
+const signed = (value, digits = 1) => `${value >= 0 ? '+' : '−'}${Math.abs(value).toFixed(digits)}`;
+const cents = value => `${(value * 100).toFixed(1)}¢`;
+const stamp = iso => iso ? `${new Date(iso).toLocaleString('en-GB', {timeZone: 'UTC', day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false})} UTC` : 'n/a';
+const day = iso => iso ? new Date(iso).toLocaleString('en-GB', {timeZone: 'UTC', day: 'numeric', month: 'short'}) : 'n/a';
+const who = row => row.handle ? `${row.handle.slice(0, 22)}` : row.short;
+
+// ---- small DOM helpers. Text from the API always goes in through textContent. ----
+function el(tag, attrs = {}, ...children) {
+  const node = document.createElement(tag);
+  for (const [name, value] of Object.entries(attrs)) {
+    if (value === null || value === undefined || value === false) continue;
+    if (name === 'class') node.className = value; else if (name === 'text') node.textContent = value; else if (name === 'html') node.innerHTML = value;
+    else if (name.startsWith('on')) node.addEventListener(name.slice(2), value); else node.setAttribute(name, value === true ? '' : value);
+  }
+  for (const child of children.flat()) if (child !== null && child !== undefined && child !== false) node.append(child);
+  return node;
+}
+function svg(tag, attrs = {}, ...children) {
+  const node = document.createElementNS(NS, tag);
+  for (const [name, value] of Object.entries(attrs)) { if (name === 'text') node.textContent = value; else if (value !== null && value !== undefined) node.setAttribute(name, value); }
+  for (const child of children.flat()) if (child) node.append(child);
+  return node;
+}
+const tip = $('#tip');
+function hover(node, lines) {
+  node.setAttribute('tabindex', '0');
+  const show = event => {
+    tip.replaceChildren(...lines().map(([tag, text, cls]) => el(tag, {text, class: cls})));
+    tip.classList.add('on');
+    const box = event.clientX === undefined ? node.getBoundingClientRect() : {left: event.clientX, top: event.clientY};
+    const x = Math.min(innerWidth - tip.offsetWidth - 16, box.left + 18), y = Math.max(12, Math.min(innerHeight - tip.offsetHeight - 12, box.top - tip.offsetHeight - 14));
+    tip.style.left = `${x}px`; tip.style.top = `${y}px`;
+  };
+  node.addEventListener('pointermove', show); node.addEventListener('focus', show);
+  node.addEventListener('pointerleave', () => tip.classList.remove('on')); node.addEventListener('blur', () => tip.classList.remove('on'));
+}
+const source = text => el('div', {class: 'src', html: `<b>Predictefy</b> · ${text}`});
+const tile = (label, value, sub, src, lead) => el('div', {class: `tile${lead ? ' lead' : ''}`}, el('span', {class: 'label', text: label}), value, sub ? el('span', {class: 'sub', text: sub}) : null, src ? el('span', {class: 'src', text: src}) : null);
+const big = (text, small) => el('b', {}, text, small ? el('small', {text: small}) : null);
+const seg = (options, current, pick, id) => el('div', {class: 'seg', id}, Object.entries(options).map(([value, label]) => el('button', {class: value === current ? 'on' : '', 'data-value': value, text: label, onclick: () => pick(value)})));
+
+// ---- scales ----
+function niceTicks(min, max, count = 5) {
+  if (min === max) { max = min + 1; }
+  const raw = (max - min) / count, power = 10 ** Math.floor(Math.log10(raw)), step = [1, 2, 2.5, 5, 10].map(m => m * power).find(s => s >= raw);
+  const ticks = [];
+  for (let v = Math.ceil(min / step) * step; v <= max + step * 1e-6; v += step) ticks.push(Math.abs(v) < step * 1e-6 ? 0 : v);
+  return ticks;
+}
+// A column that grows from the baseline with a rounded data end and a square foot.
+function columnPath(x, width, y0, y1, radius = 4) {
+  const r = Math.min(radius, Math.abs(y1 - y0), width / 2), up = y1 < y0, s = up ? 1 : -1;
+  return `M${x},${y0}V${y1 + s * r}Q${x},${y1} ${x + r},${y1}H${x + width - r}Q${x + width},${y1} ${x + width},${y1 + s * r}V${y0}Z`;
+}
+function barPath(x0, x1, y, height, radius = 4) {
+  const r = Math.min(radius, Math.abs(x1 - x0), height / 2), right = x1 > x0, s = right ? 1 : -1;
+  return `M${x0},${y}H${x1 - s * r}Q${x1},${y} ${x1},${y + r}V${y + height - r}Q${x1},${y + height} ${x1 - s * r},${y + height}H${x0}Z`;
+}
+
+// ---- chart: one column per wallet, above or below the zero line ----
+function columns(rows, {width, height, emphasis, labelEnds = true, colour}) {
+  const m = {l: 76, r: 14, t: 22, b: 26}, w = width - m.l - m.r, h = height - m.t - m.b;
+  const lo = Math.min(0, ...rows.map(r => r.profit)), hi = Math.max(0, ...rows.map(r => r.profit));
+  const ticks = niceTicks(lo, hi, 5), top = Math.max(hi, ticks.at(-1)), bottom = Math.min(lo, ticks[0]);
+  const y = v => m.t + (top - v) / (top - bottom) * h, band = w / rows.length, bar = Math.min(24, Math.max(4, band - 6));
+  const root = svg('svg', {width, height, viewBox: `0 0 ${width} ${height}`, role: 'img'});
+  for (const t of ticks) root.append(svg('line', {x1: m.l, x2: width - m.r, y1: y(t), y2: y(t), stroke: t === 0 ? 'var(--axis)' : 'var(--grid)', 'stroke-width': 1}), svg('text', {x: m.l - 10, y: y(t) + 4.5, 'text-anchor': 'end', class: 'num', text: compact(t)}));
+  rows.forEach((row, i) => {
+    const x = m.l + i * band + (band - bar) / 2, fill = colour ? colour(row, i) : (emphasis && !emphasis(row, i) ? 'var(--rest)' : row.profit < 0 ? 'var(--down)' : 'var(--up)');
+    const g = svg('g', {class: 'col'});
+    if (row.profit !== 0) g.append(svg('path', {class: 'dm', d: columnPath(x, bar, y(0), y(row.profit)), fill}));
+    const hit = svg('rect', {class: 'hit', x: m.l + i * band, y: m.t, width: band, height: h});
+    hover(hit, () => [['strong', usd(row.profit)], ['span', `${who(row)} · rank ${row.rank} on this board`], ['span', `traded ${usd(row.volume)}`], ['span', row.short, 'w']]);
+    g.append(hit); root.append(g);
+  });
+  if (labelEnds && rows.length) {
+    const best = rows.reduce((a, b) => (b.profit > a.profit ? b : a)), worst = rows.reduce((a, b) => (b.profit < a.profit ? b : a));
+    const at = row => m.l + rows.indexOf(row) * band + band / 2;
+    const put = (row, above) => { const x = at(row), right = x > width * 0.6; root.append(svg('text', {x: x + (right ? -bar : bar), y: y(row.profit) + (above ? 14 : -4), 'text-anchor': right ? 'end' : 'start', class: 'v num', text: compact(row.profit)})); };
+    if (best.profit > 0) put(best, true);
+    if (worst.profit < 0) put(worst, false);
+  }
+  root.append(svg('text', {x: m.l, y: height - 6, text: 'rank 1'}), svg('text', {x: width - m.r, y: height - 6, 'text-anchor': 'end', text: `rank ${rows.length}`}));
+  return root;
+}
+
+// ---- tab 1: the two boards ----
+function boardsTab(d) {
+  const w = state.window, s = d.windows.find(x => x.window === w), busiest = d.boards[`volume-${w}`] || [], earners = d.boards[`profit-${w}`] || [];
+  const lost = s.busiest.profit < 0;
+  const meter = el('div', {class: 'meter'}, el('i', {style: `flex:${s.busiest.inRed}`}), el('i', {style: `flex:${s.busiest.wallets - s.busiest.inRed}`}));
+  const board = (rows, id) => el('div', {class: 'scroll', id}, el('table', {}, el('thead', {}, el('tr', {}, ['Rank', 'Wallet', 'Profit (Polymarket)', 'Volume', 'Per dollar traded'].map((t, i) => el('th', {text: t, class: i === 1 ? 'l' : ''})))),
+    el('tbody', {}, rows.map(r => el('tr', {}, el('td', {text: r.rank}), el('td', {class: 'l'}, r.handle ? el('span', {class: 'h', text: r.handle.slice(0, 26)}) : null, el('span', {class: 'w', text: r.short})), el('td', {class: r.profit < 0 ? 'minus' : '', text: usd(r.profit)}), el('td', {text: usd(r.volume)}), el('td', {text: r.volume > 0 ? `${signed(r.profit / r.volume * 100)}¢` : 'n/a'}))))));
+  return [
+    el('div', {class: 'filters'}, el('span', {class: 'label', text: 'Window'}), seg(WINDOW_NAMES, w, v => { state.window = v; render(); }, 'windowSeg'),
+      el('button', {class: 'ghost', id: 'tableToggle', text: state.table ? 'Show charts' : 'Show tables', onclick: () => { state.table = !state.table; render(); }}),
+      el('span', {class: 'grow'}), el('span', {class: 'src', text: `read ${stamp(d.takenAt.boards)}`})),
+    el('div', {class: 'tiles', style: 'grid-template-columns:1.5fr 1fr 1fr 1fr'},
+      tile(`The ${s.busiest.wallets} busiest wallets, together`, el('b', {id: 'busiestTotal', text: usd(s.busiest.profit)}), `on ${compact(s.busiest.volume)} traded: ${s.busiest.centsPerDollar === null ? 'n/a' : `${signed(s.busiest.centsPerDollar)}¢`} for every dollar`, 'leaderboard?by=volume · profit is Polymarket\'s figure', true),
+      el('div', {class: 'tile', id: 'inRedTile'}, el('span', {class: 'label', text: 'Of those, in the red'}), big(String(s.busiest.inRed), `of ${s.busiest.wallets}`), meter, el('span', {class: 'sub', text: `${s.busiest.inProfit} in profit${s.busiest.flat ? `, ${s.busiest.flat} flat` : ''}`})),
+      tile(`The ${s.earners.wallets} top earners made`, el('b', {id: 'earnersTotal', text: compact(s.earners.profit)}), `the top 10 took ${pct(s.earners.top10Share)} of it · on ${compact(s.earners.volume)} traded`, 'leaderboard?by=profit'),
+      tile('Wallets on both lists', big(String(s.onBoth), `of ${s.busiest.wallets}`), 'busy and among the top earners')),
+    state.table
+      ? el('div', {class: 'cards', style: 'grid-template-columns:1fr 1fr'}, el('div', {class: 'card'}, el('h2', {text: `The ${busiest.length} busiest wallets`}), board(busiest, 'busiestTable')), el('div', {class: 'card'}, el('h2', {text: `The ${earners.length} top earners`}), board(earners, 'earnersTable')))
+      : el('div', {class: 'cards', style: 'grid-template-columns:1.12fr .88fr'},
+        el('div', {class: 'card', id: 'busiestCard'}, el('h2', {text: `The ${busiest.length} wallets that traded the most, ${WINDOW_NAMES[w].toLowerCase()}`}),
+          el('div', {class: 'sub', text: lost ? `Ranked by volume. Each column is one wallet's profit or loss. Its five largest losses are ${pct(s.busiest.worst5Share)} of everything lost.` : 'Ranked by volume. Each column is one wallet\'s profit or loss.'}),
+          el('div', {class: 'legend'}, el('span', {}, el('i', {class: 'key', style: 'background:var(--up)'}), 'in profit'), el('span', {}, el('i', {class: 'key', style: 'background:var(--down)'}), 'in the red')),
+          columns(busiest, {width: 960, height: 420}),
+          source(`GET /v1/traders/polymarket/leaderboard?by=volume&window=${w}`)),
+        el('div', {class: 'card', id: 'earnersCard'}, el('h2', {text: `The ${earners.length} wallets that made the most`}),
+          el('div', {class: 'sub', text: `Ranked by profit. Number 1 made ${compact(s.earners.best)}; number ${earners.length} made ${compact(s.earners.last)}.`}),
+          el('div', {class: 'legend'}, el('span', {}, el('i', {class: 'key', style: 'background:var(--up)'}), `top 10: ${pct(s.earners.top10Share)} of the total`), el('span', {}, el('i', {class: 'key', style: 'background:var(--rest)'}), 'the other 40')),
+          columns(earners, {width: 740, height: 420, emphasis: (row, i) => i < 10, labelEnds: false}),
+          source(`GET /v1/traders/polymarket/leaderboard?by=profit&window=${w}`))),
+  ];
+}
+
+// ---- tab 2: the same question over four windows ----
+function windowsTab(d) {
+  const width = 900, rowH = 62, m = {l: 118, r: 20, t: 10}, w = width - m.l - m.r;
+  const chart = svg('svg', {width, height: m.t + rowH * 4 + 6, role: 'img'});
+  d.windows.forEach((s, i) => {
+    const y = m.t + i * rowH + 12, n = s.busiest.wallets || 1, red = s.busiest.inRed / n * w, g = svg('g', {class: 'rowg'});
+    g.append(svg('text', {x: m.l - 14, y: y + 23, 'text-anchor': 'end', class: 'n', text: WINDOW_NAMES[s.window]}));
+    if (s.busiest.inRed) g.append(svg('rect', {class: 'dm', x: m.l, y, width: Math.max(0, red - 1), height: 34, fill: 'var(--down)', rx: 0}));
+    g.append(svg('path', {class: 'dm', d: barPath(m.l + red + 1, m.l + w, y, 34), fill: 'var(--up)'}));
+    if (red > 150) g.append(svg('text', {x: m.l + 12, y: y + 22.5, style: 'fill:#fff;font-size:15.5px;font-weight:600', text: `${s.busiest.inRed} in the red`}));
+    if (w - red > 150) g.append(svg('text', {x: m.l + w - 12, y: y + 22.5, 'text-anchor': 'end', style: 'fill:#fff;font-size:15.5px;font-weight:600', text: `${s.busiest.wallets - s.busiest.inRed} not`}));
+    const hit = svg('rect', {class: 'hit', x: m.l, y: y - 8, width: w, height: 50});
+    hover(hit, () => [['strong', `${s.busiest.inRed} of ${s.busiest.wallets} in the red`], ['span', `${WINDOW_NAMES[s.window]} · the busiest wallets together: ${usd(s.busiest.profit)}`]]);
+    g.append(hit); chart.append(g);
+  });
+  const maxCents = Math.max(...d.windows.flatMap(s => [Math.abs(s.busiest.centsPerDollar || 0), Math.abs(s.earners.centsPerDollar || 0)]), 1);
+  const mini = value => value === null ? el('span', {class: 'muted', text: 'n/a'}) : el('span', {}, el('i', {class: 'bar', style: `width:${Math.abs(value) / maxCents * 90}px;background:${value < 0 ? 'var(--down)' : 'var(--up)'};margin-right:10px`}), `${signed(value)}¢`);
+  const flipRows = (list, a, b) => list.length ? list.slice(0, 6).map(f => el('tr', {}, el('td', {class: 'l'}, f.handle ? el('span', {class: 'h', text: f.handle.slice(0, 20)}) : null, el('span', {class: 'w', text: `${f.wallet.slice(0, 6)}…${f.wallet.slice(-4)}`})), el('td', {class: f.short < 0 ? 'minus' : 'plus', text: usd(f.short)}), el('td', {class: f.long < 0 ? 'minus' : 'plus', text: usd(f.long)}))) : [el('tr', {}, el('td', {class: 'l muted', colspan: 3, text: `No wallet shows opposite signs for ${a} and ${b}.`}))];
+  return [
+    el('div', {class: 'cards', style: 'grid-template-columns:940px 1fr'},
+      el('div', {class: 'card', id: 'redCard'}, el('h2', {text: 'How many of the 50 busiest wallets are in the red'}), el('div', {class: 'sub', text: 'Each window ranks its own fifty-wallet board. These are not one fixed group followed over time.'}),
+        el('div', {class: 'legend'}, el('span', {}, el('i', {class: 'key', style: 'background:var(--down)'}), 'in the red'), el('span', {}, el('i', {class: 'key', style: 'background:var(--up)'}), 'in profit or flat')),
+        chart, source('GET /v1/traders/polymarket/leaderboard?by=volume&window=day|week|month|all')),
+      el('div', {class: 'card', id: 'flipCard'}, el('h2', {text: 'Today one way, this month the other'}), el('div', {class: 'sub', text: 'Wallets whose two figures point in opposite directions. Only wallets listed on a board for both windows can be compared.'}),
+        el('table', {style: 'margin-top:6px'}, el('thead', {}, el('tr', {}, el('th', {class: 'l', text: 'Wallet'}), el('th', {text: 'Today'}), el('th', {text: 'This month'}))), el('tbody', {}, flipRows(d.flips.dayVsMonth, 'today', 'this month'))),
+        source('the same leaderboard rows, matched by wallet'))),
+    el('div', {class: 'card', id: 'perDollarCard', style: 'margin-top:14px'}, el('h2', {text: 'Made or lost for every dollar traded'}),
+      el('div', {class: 'sub', text: 'Each board\'s total profit divided by its total volume. Trading more is not the same as making more.'}),
+      el('table', {style: 'margin-top:6px'}, el('thead', {}, el('tr', {}, ['Window', 'Busiest 50 traded', 'Their result', 'Per dollar', 'Top 50 earners traded', 'Their profit', 'Per dollar', 'On both'].map(t => el('th', {text: t})))),
+        el('tbody', {}, d.windows.map(s => el('tr', {}, el('td', {text: WINDOW_NAMES[s.window]}), el('td', {text: compact(s.busiest.volume)}), el('td', {class: s.busiest.profit < 0 ? 'minus' : '', text: usd(s.busiest.profit)}), el('td', {}, mini(s.busiest.centsPerDollar)), el('td', {text: compact(s.earners.volume)}), el('td', {text: usd(s.earners.profit)}), el('td', {}, mini(s.earners.centsPerDollar)), el('td', {text: `${s.onBoth} of ${s.busiest.wallets}`}))))),
+      source('GET /v1/traders/polymarket/leaderboard · profitUsd and volumeUsd as Polymarket reports them')),
+  ];
+}
+
+// ---- tab 3: what a positions page shows ----
+function booksTab(d) {
+  if (!d.books) return [el('div', {class: 'empty', text: 'The books were not read in this run.'})];
+  const earners = d.books.filter(b => b.role === 'earner'), losses = d.books.filter(b => b.role === 'loss');
+  const inRed = earners.filter(b => b.paper < 0).length, dead = earners.reduce((a, b) => a + b.deadTickets, 0), deadPaid = earners.reduce((a, b) => a + b.deadPaid, 0);
+  const width = 1010, rowH = 40, m = {l: 196, r: 96, t: 8}, w = width - m.l - m.r;
+  const lo = Math.min(0, ...earners.map(b => b.paper)), hi = Math.max(0, ...earners.map(b => b.monthProfit)), x = v => m.l + (v - lo) / (hi - lo) * w;
+  const chart = svg('svg', {width, height: m.t + earners.length * rowH + 8, role: 'img'});
+  chart.append(svg('line', {x1: x(0), x2: x(0), y1: m.t, y2: m.t + earners.length * rowH, stroke: 'var(--axis)'}));
+  earners.forEach((b, i) => {
+    const y = m.t + i * rowH + 5, g = svg('g', {class: 'rowg'});
+    g.append(svg('text', {x: m.l - 12, y: y + 19, 'text-anchor': 'end', class: 'n', text: who(b).slice(0, 20)}));
+    g.append(svg('path', {class: 'dm', d: barPath(x(0), x(b.monthProfit), y, 13), fill: 'var(--up)'}));
+    if (b.paper !== 0) g.append(svg('path', {class: 'dm', d: barPath(x(0), x(b.paper), y + 15, 13), fill: b.paper < 0 ? 'var(--down)' : 'var(--rest)'}));
+    g.append(svg('text', {x: x(b.monthProfit) + 8, y: y + 11.5, class: 'num', style: 'fill:var(--ink-2)', text: compact(b.monthProfit)}));
+    if (b.paper < 0) g.append(svg('text', {x: Math.max(x(b.paper) - 8, m.l + 4), y: y + 26.5, 'text-anchor': x(b.paper) - 8 < m.l + 70 ? 'start' : 'end', class: 'num', style: x(b.paper) - 8 < m.l + 70 ? 'fill:#fff;font-weight:600' : 'fill:var(--ink-2)', text: compact(b.paper)}));
+    const hit = svg('rect', {class: 'hit', x: 0, y: y - 4, width, height: rowH});
+    hover(hit, () => [['strong', `${usd(b.monthProfit)} this month`], ['span', `positions page adds up to ${usd(b.paper)}`], ['span', `${b.deadTickets} dead tickets that cost ${usd(b.deadPaid)}${b.partial ? ' · first 400 rows only' : ''}`], ['span', b.short, 'w']]);
+    g.append(hit); chart.append(g);
+  });
+  const worstBook = [...earners].sort((a, b) => a.paper - b.paper)[0];
+  return [
+    el('div', {class: 'tiles', style: 'grid-template-columns:1.3fr 1fr 1fr 1fr'},
+      tile(`This month's ${earners.length} top earners`, el('b', {id: 'booksInRed'}, String(inRed), el('small', {text: `of ${earners.length} have a positions page in the red`})), 'A wallet can be millions up and still show a loss on what it holds.', 'accounts/{wallet}/positions · unrealizedPnl summed', true),
+      tile('Dead tickets in those books', big(dead.toLocaleString('en-US')), `settled at zero, never cleared out: ${compact(deadPaid)} paid for them`),
+      tile('Largest gap', big(compact(worstBook.paper)), `on the page of a wallet that made ${compact(worstBook.monthProfit)} this month`),
+      tile('Why', el('b', {style: 'font-size:23px;line-height:1.25;white-space:normal', text: 'Winners get cashed in and leave the page. Losers stay.'}), null)),
+    el('div', {class: 'cards', style: 'grid-template-columns:1050px 1fr'},
+      el('div', {class: 'card', id: 'booksCard'}, el('h2', {text: 'Made this month, against what the positions page adds up to'}),
+        el('div', {class: 'legend'}, el('span', {}, el('i', {class: 'key', style: 'background:var(--up)'}), 'profit this month (Polymarket\'s figure)'), el('span', {}, el('i', {class: 'key', style: 'background:var(--down)'}), 'paper result of every position row read')),
+        chart, source('GET /v1/traders/polymarket/leaderboard?by=profit&window=month · GET /v1/accounts/polymarket/{wallet}/positions (up to 400 rows a wallet)')),
+      el('div', {class: 'card', id: 'deadCard'}, el('h2', {text: 'The largest dead tickets on the busiest board'}), el('div', {class: 'sub', text: 'From the books of the five largest losses among this month\'s busiest wallets.'}),
+        el('div', {style: 'margin-top:6px'}, losses.flatMap(b => b.biggestDead.map(t => ({b, t}))).sort((a, c) => c.t.paid - a.t.paid).slice(0, 6).map(({b, t}) => el('div', {class: 'ticket'}, el('b', {text: `${t.title.slice(0, 44)} · ${t.outcome.slice(0, 16)}`}), el('b', {class: 'num minus', text: usd(-t.paid)}), el('span', {text: `${Math.round(t.shares).toLocaleString('en-US')} shares at ${cents(t.avg)} · ${b.short}`}), el('span', {text: t.endDate ? `ended ${t.endDate}` : ''})))),
+        source('GET /v1/accounts/polymarket/{wallet}/positions · raw.redeemable, raw.curPrice = 0'))),
+  ];
+}
+
+// ---- tab 4: how new the winners are ----
+function agesTab(d) {
+  if (!d.ages) return [el('div', {class: 'empty', text: 'Wallet ages were not read in this run.'})];
+  const width = 1780, rowH = 96, m = {l: 130, r: 30, t: 30, b: 34}, w = width - m.l - m.r, maxDays = Math.max(2000, ...d.ages.flatMap(a => a.days));
+  const x = days => m.l + Math.log10(Math.max(1, days) ) / Math.log10(maxDays) * w;
+  const chart = svg('svg', {width, height: m.t + rowH * 4 + m.b, role: 'img'});
+  for (const t of [1, 7, 30, 90, 365, 730, 1825]) if (t <= maxDays) chart.append(svg('line', {x1: x(t), x2: x(t), y1: m.t - 6, y2: m.t + rowH * 4, stroke: 'var(--grid)'}), svg('text', {x: x(t), y: m.t + rowH * 4 + 22, 'text-anchor': 'middle', text: t === 1 ? '1 day' : t === 7 ? '1 week' : t === 30 ? '30 days' : t === 90 ? '90 days' : t === 365 ? '1 year' : t === 730 ? '2 years' : '5 years'}));
+  d.ages.forEach((a, i) => {
+    const cy = m.t + i * rowH + rowH / 2;
+    chart.append(svg('text', {x: m.l - 16, y: cy + 5, 'text-anchor': 'end', class: 'n', text: WINDOW_NAMES[a.window]}));
+    // Dots that would overlap are stacked away from the centre line, so every wallet stays visible.
+    const placed = [];
+    for (const days of a.days) {
+      let px = x(days), level = 0;
+      // Stack away from the centre line, at most three deep each way; after that, start a new column beside it.
+      while (placed.some(p => p.level === level && Math.abs(p.px - px) < 11)) { level = level <= 0 ? -level + 1 : -level; if (Math.abs(level) > 3) { level = 0; px += 11; } }
+      placed.push({px, level});
+      const dot = svg('circle', {class: 'dm', cx: px, cy: cy + level * 11, r: 5, fill: days < 30 ? 'var(--down)' : 'var(--up)', stroke: 'var(--surface)', 'stroke-width': 2});
+      hover(dot, () => [['strong', `${days.toLocaleString('en-US')} days old`], ['span', `on the profit board, ${WINDOW_NAMES[a.window].toLowerCase()}`]]);
+      chart.append(dot);
+    }
+    if (a.median !== null) chart.append(svg('line', {x1: x(a.median), x2: x(a.median), y1: cy - 40, y2: cy + 40, stroke: '#fff', 'stroke-width': 2}), svg('text', {x: x(a.median) + 8, y: cy - 30, class: 'v', text: `median ${Math.round(a.median).toLocaleString('en-US')} days`}));
+  });
+  return [
+    el('div', {class: 'tiles', style: 'grid-template-columns:repeat(4,1fr)'}, d.ages.map((a, i) => tile(`Top earners, ${WINDOW_NAMES[a.window].toLowerCase()}`, el('b', {}, String(a.under30), el('small', {text: `of ${a.known} are under 30 days old`})), `median age ${a.median === null ? 'n/a' : `${Math.round(a.median).toLocaleString('en-US')} days`} · ${a.over365} are over a year old`, null, i === 1))),
+    el('div', {class: 'card', id: 'agesCard'}, el('h2', {text: 'How old each top-earning wallet is'}), el('div', {class: 'sub', text: 'One dot per wallet, by the date Predictefy first saw it trade. The scale is stretched at the young end.'}),
+      el('div', {class: 'legend'}, el('span', {}, el('i', {class: 'key round', style: 'background:var(--down)'}), 'under 30 days old'), el('span', {}, el('i', {class: 'key round', style: 'background:var(--up)'}), '30 days or older'), el('span', {}, el('i', {class: 'key', style: 'background:#fff;width:3px;height:14px'}), 'median')),
+      chart, source(`GET /v1/traders/polymarket/wallets/{wallet} · stats.firstSeen · read ${stamp(d.takenAt.ages)} · a new wallet is not a new person`)),
+  ];
+}
+
+// ---- tab 5: the scored buys ----
+function entryTab(d) {
+  const e = d.entry;
+  if (!e) return [el('div', {class: 'empty', text: 'The feed was not read in this run.'})];
+  const pick = state.group === 'all' ? e.all : e.groups.find(g => g.id === state.group) || e.all;
+  const options = Object.fromEntries([['all', GROUP_NAMES.all], ...e.groups.map(g => [g.id, GROUP_NAMES[g.id]])]);
+  // chart A: return per label
+  const rows = [e.all, ...e.groups].filter(g => g.returnPct !== null), widthA = 800, rowH = 50, mA = {l: 118, r: 96, t: 12}, wA = widthA - mA.l - mA.r;
+  const span = Math.max(5, ...rows.map(g => Math.abs(g.returnPct))) * 1.08, xa = v => mA.l + (v + span) / (2 * span) * wA;
+  const a = svg('svg', {width: widthA, height: mA.t + rows.length * rowH + 26, role: 'img'});
+  a.append(svg('line', {x1: xa(0), x2: xa(0), y1: mA.t, y2: mA.t + rows.length * rowH, stroke: 'var(--axis)'}), svg('text', {x: xa(0), y: mA.t + rows.length * rowH + 20, 'text-anchor': 'middle', text: 'broke even'}));
+  rows.forEach((g, i) => {
+    const y = mA.t + i * rowH + 13, row = svg('g', {class: 'rowg'}), end = xa(g.returnPct), chosen = g.id === state.group;
+    row.append(svg('text', {x: mA.l - 14, y: y + 17, 'text-anchor': 'end', class: chosen ? 'v' : 'n', text: GROUP_NAMES[g.id]}));
+    row.append(svg('path', {class: 'dm', d: barPath(xa(0), end, y, 24), fill: g.returnPct < 0 ? 'var(--down)' : 'var(--up)'}));
+    row.append(svg('text', {x: widthA - 8, y: y + 17, 'text-anchor': 'end', class: 'v num', text: `${signed(g.returnPct)}%`}));
+    const hit = svg('rect', {class: 'hit', x: 0, y: y - 10, width: widthA, height: rowH, style: 'cursor:pointer'});
+    hit.addEventListener('click', () => { state.group = g.id; render(); });
+    hover(hit, () => [['strong', `${signed(g.returnPct)}% on decided buys`], ['span', `${GROUP_NAMES[g.id]}: paid ${usd(g.settledCost)}, got back ${usd(g.payout)}`], ['span', `${g.settledBuys.toLocaleString('en-US')} decided buys of ${g.buys.toLocaleString('en-US')}`]]);
+    row.append(hit); a.append(row);
+  });
+  // chart B: price paid against what a share paid, by price band
+  const widthB = 900, rowB = 54, mB = {l: 118, r: 190, t: 30}, wB = widthB - mB.l - mB.r, xb = v => mB.l + v * wB, buckets = pick.buckets;
+  const b = svg('svg', {width: widthB, height: mB.t + buckets.length * rowB + 30, role: 'img'});
+  for (const t of [0, 0.2, 0.4, 0.6, 0.8, 1]) b.append(svg('line', {x1: xb(t), x2: xb(t), y1: mB.t - 8, y2: mB.t + buckets.length * rowB, stroke: 'var(--grid)'}), svg('text', {x: xb(t), y: mB.t + buckets.length * rowB + 20, 'text-anchor': 'middle', text: `${t * 100}¢`}));
+  buckets.forEach((k, i) => {
+    const cy = mB.t + i * rowB + rowB / 2 - 4, row = svg('g', {class: 'rowg'});
+    row.append(svg('text', {x: mB.l - 14, y: cy + 5, 'text-anchor': 'end', class: 'n', text: k.label}));
+    if (k.paid === null || k.settledBuys < 20) { row.append(svg('text', {x: mB.l + 6, y: cy + 5, text: k.settledBuys ? `only ${k.settledBuys} decided buys: too few to show` : 'no decided buys'})); b.append(row); return; }
+    const ahead = k.won >= k.paid;
+    row.append(svg('line', {class: 'dm', x1: xb(k.paid), x2: xb(k.won), y1: cy, y2: cy, stroke: ahead ? 'var(--up)' : 'var(--down)', 'stroke-width': 4, 'stroke-linecap': 'round'}));
+    row.append(svg('circle', {cx: xb(k.paid), cy, r: 7, fill: 'var(--surface)', stroke: 'var(--ink-2)', 'stroke-width': 2.5}));
+    row.append(svg('circle', {class: 'dm', cx: xb(k.won), cy, r: 8, fill: ahead ? 'var(--up)' : 'var(--down)', stroke: 'var(--surface)', 'stroke-width': 2}));
+    row.append(svg('text', {x: widthB - mB.r + 16, y: cy + 5, class: 'num', style: 'fill:var(--ink-2);font-size:14.5px', text: `paid ${cents(k.paid)}, worth ${cents(k.won)}`}));
+    const hit = svg('rect', {class: 'hit', x: 0, y: cy - rowB / 2 + 4, width: widthB, height: rowB});
+    hover(hit, () => [['strong', `${signed(k.returnPct)}%`], ['span', `${k.label}: paid ${cents(k.paid)} a share on average, each share ended up worth ${cents(k.won)}`], ['span', `${k.settledBuys.toLocaleString('en-US')} decided buys · paid ${usd(k.settledCost)}, got back ${usd(k.payout)}`]]);
+    row.append(hit); b.append(row);
+  });
+  const table = el('table', {id: 'entryTable'}, el('thead', {}, el('tr', {}, ['Label', 'Buys read', 'Decided', 'Wallets', 'Paid', 'Got back', 'Return', 'Buys that won', 'From', 'To'].map(t => el('th', {text: t})))),
+    el('tbody', {}, [e.all, ...e.groups].map(g => el('tr', {}, el('td', {text: GROUP_NAMES[g.id]}), el('td', {text: g.buys.toLocaleString('en-US')}), el('td', {text: g.settledBuys.toLocaleString('en-US')}), el('td', {text: (g.wallets ?? 0).toLocaleString('en-US')}), el('td', {text: usd(g.settledCost)}), el('td', {text: usd(g.payout)}), el('td', {class: g.returnPct < 0 ? 'minus' : 'plus', text: g.returnPct === null ? 'n/a' : `${signed(g.returnPct)}%`}), el('td', {text: g.winRate === null ? 'n/a' : pct(g.winRate)}), el('td', {text: day(g.from)}), el('td', {text: day(g.to)})))));
+  return [
+    el('div', {class: 'filters'}, el('span', {class: 'label', text: 'Predictefy\'s label at the time of the trade'}), seg(options, state.group, v => { state.group = v; render(); }, 'groupSeg'),
+      el('button', {class: 'ghost', id: 'tableToggle', text: state.table ? 'Show charts' : 'Show table', onclick: () => { state.table = !state.table; render(); }}),
+      el('span', {class: 'grow'}), el('span', {class: 'src', text: `feed read ${stamp(d.takenAt.feed)}`})),
+    el('div', {class: 'tiles', style: 'grid-template-columns:1.25fr 1fr 1fr 1fr 1fr'},
+      tile(`${GROUP_NAMES[pick.id]}: for every dollar paid`, el('b', {id: 'entryReturn', text: pick.returnPct === null ? 'n/a' : `${signed(pick.returnPct)}%`}), pick.returnPct === null ? null : `paid ${usd(pick.settledCost)}, got back ${usd(pick.payout)}`, 'buys in markets that are decided, held to the end', true),
+      tile('Buys scored', big(pick.settledBuys.toLocaleString('en-US')), `of ${pick.buys.toLocaleString('en-US')} read · ${pick.openBuys.toLocaleString('en-US')} still open, ${pick.unknownBuys.toLocaleString('en-US')} not looked up`),
+      tile('Buys that won', big(pick.winRate === null ? 'n/a' : pct(pick.winRate)), pick.meanPrice === null ? null : `their average price when bought: ${cents(pick.meanPrice)}`),
+      tile('Wallets behind on their buys', el('b', {}, String(pick.judged.behind), el('small', {text: `of ${pick.judged.wallets.toLocaleString('en-US')}`})), 'wallets with 5 or more decided buys in the sample'),
+      tile('Decided buys are from', el('b', {style: 'font-size:27px', text: `${day(pick.decidedFrom)} to ${day(pick.decidedTo)}`}), `${(pick.wallets ?? 0).toLocaleString('en-US')} wallets bought in the sample`)),
+    state.table ? el('div', {class: 'card'}, el('h2', {text: 'Every label, in numbers'}), table, source('GET /v1/traders/smart-money · GET /v1/traders/polymarket/markets/{marketId}/trades')) :
+    el('div', {class: 'cards', style: 'grid-template-columns:840px 1fr'},
+      el('div', {class: 'card', id: 'returnCard'}, el('h2', {text: 'What came back for every dollar paid, by label'}), el('div', {class: 'sub', text: 'Buys in markets that are now decided. A share pays $1 or nothing. Fees are not included.'}),
+        a, source('GET /v1/traders/smart-money?venue=polymarket&category=… · categoryAtTrade')),
+      el('div', {class: 'card', id: 'priceCard'}, el('h2', {text: `Price paid against what a share turned out to be worth · ${GROUP_NAMES[pick.id]}`}), el('div', {class: 'sub', text: 'At a fair price the two dots sit on top of each other.'}),
+        el('div', {class: 'legend'}, el('span', {}, el('i', {class: 'key ring'}), 'average price paid'), el('span', {}, el('i', {class: 'key round', style: 'background:var(--up)'}), 'worth more than paid'), el('span', {}, el('i', {class: 'key round', style: 'background:var(--down)'}), 'worth less than paid')),
+        b, source('GET /v1/traders/polymarket/markets/{marketId}/trades?limit=20 · last trade at 98.5¢ or more counts as $1, 1.5¢ or less as $0'))),
+  ];
+}
+
+// ---- tab 6: method and cost ----
+function methodTab(d) {
+  const u = d.usage, e = d.entry;
+  const stepRow = (name, what) => { const s = u?.byStep?.[name]; return s ? el('tr', {}, el('td', {text: what}), el('td', {text: s.requests.toLocaleString('en-US')}), el('td', {text: s.credits.toLocaleString('en-US')})) : null; };
+  return [el('div', {class: 'steps'},
+    el('div', {class: 'card', id: 'methodCard'}, el('h2', {text: 'How the numbers were made'}),
+      el('ol', {}, [
+        ['The two boards.', 'Polymarket\'s leaderboard, ranked by profit and then by volume, over four windows. Each call returns 50 wallets with Polymarket\'s own profit and volume figures.', 'GET /v1/traders/polymarket/leaderboard · 1 credit'],
+        ['The books.', 'Every position row of the month\'s top earners and of the five largest losses on the busiest board, up to 400 rows a wallet.', 'GET /v1/accounts/polymarket/{wallet}/positions · 3 credits a page'],
+        ['Wallet ages.', 'The first-seen date of every wallet on a profit board.', 'GET /v1/traders/polymarket/wallets/{wallet} · 1 credit'],
+        ['The scored trades.', `Predictefy's smart-money feed, read back page by page for each label${e ? `: ${e.rows.toLocaleString('en-US')} trades, ${e.sells.toLocaleString('en-US')} of them sells, which are left out` : ''}.`, 'GET /v1/traders/smart-money · 10 credits a page'],
+        ['What each buy turned into.', `The newest trades of every market in the sample${e ? ` (${e.markets.read.toLocaleString('en-US')} of ${e.markets.inSample.toLocaleString('en-US')} markets looked up, ${e.markets.decided.toLocaleString('en-US')} decided)` : ''}. A last trade at 98.5¢ or more counts as a win, 1.5¢ or less as a loss.`, 'GET /v1/traders/polymarket/markets/{marketId}/trades · 2 credits'],
+      ].map(([head, text, src]) => el('li', {}, el('b', {text: head}), ` ${text} `, el('code', {text: src}))))),
+    el('div', {class: 'card', id: 'costCard'}, el('h2', {text: 'What this study cost to run'}),
+      u ? el('table', {style: 'margin-top:6px'}, el('thead', {}, el('tr', {}, el('th', {text: 'Step'}), el('th', {text: 'Requests'}), el('th', {text: 'Credits'}))),
+        el('tbody', {}, stepRow('leaderboards', 'Leaderboards'), stepRow('positions', 'Position pages'), stepRow('profiles', 'Wallet profiles'), stepRow('feed', 'Feed pages'), stepRow('market tapes', 'Market tapes'),
+          el('tr', {}, el('td', {}, el('b', {text: 'Total'})), el('td', {}, el('b', {text: u.requests.toLocaleString('en-US')})), el('td', {}, el('b', {id: 'costCredits', text: u.credits.toLocaleString('en-US')}))))) : el('div', {class: 'note', text: 'No usage was saved with this run.'}),
+      el('div', {class: 'note', text: u ? `Counted from the x-credits-charged header on every response. This run read ${u.settings?.pages ?? '?'} feed pages a label and up to ${(u.settings?.markets ?? 0).toLocaleString('en-US')} markets. The default settings (15 pages, 2,500 markets) come to about 6,000 credits; Predictefy's free plan includes 25,000 a month.` : ''}),
+      el('table', {style: 'margin-top:10px'}, el('thead', {}, el('tr', {}, el('th', {text: 'Predictefy plan'}), el('th', {text: 'Credits a month'}), el('th', {class: 'l', text: 'What fits'}))),
+        el('tbody', {}, [['Free, $0', '25,000', 'The default study about four times a month, or the leaderboards alone every hour'], ['Builder, $48.88', '500,000', 'A study this size every day'], ['Pro, $149', '5,000,000', 'Every label read back to the start of the feed, daily']].map(([plan, credits, fits]) => el('tr', {}, el('td', {text: plan}), el('td', {text: credits}), el('td', {class: 'l', style: 'white-space:normal', text: fits}))))),
+      el('a', {class: 'btn', href: UPGRADE, target: '_blank', rel: 'noopener', text: 'Predictefy plans →'})),
+    el('div', {class: 'card', id: 'limitsCard', style: 'grid-column:1 / -1'}, el('h2', {text: 'What this cannot tell you'}),
+      el('ul', {}, [
+        ['A wallet is not a person.', 'One trader can run several wallets, and a loss in one can be the other half of a position somewhere else.'],
+        ['Profit is Polymarket\'s number.', 'The boards report it and this study does not recompute it. A board holds 50 wallets, so nothing here counts every trader.'],
+        ['The feed is a sample.', 'It holds the trades Predictefy scored since it started collecting, not every trade on Polymarket, and its labels are Predictefy\'s.'],
+        ['A scored buy is held to the end.', 'The study does not know whether the wallet sold before the market settled, and it leaves out fees and markets that are still open.'],
+        ['The past is not a forecast.', 'None of this says what any wallet will do next. Nothing here is financial advice.'],
+      ].map(([head, text]) => el('li', {}, el('b', {text: head}), ` ${text}`))))),
+  ];
+}
+
+const TABS = {boards: boardsTab, windows: windowsTab, books: booksTab, ages: agesTab, entry: entryTab, method: methodTab};
+function render() {
+  for (const button of document.querySelectorAll('#tabs button')) button.classList.toggle('on', button.dataset.tab === state.tab);
+  tip.classList.remove('on');
+  if (!state.data) return;
+  $('#main').replaceChildren(...TABS[state.tab](state.data));
+}
+document.querySelector('#tabs').addEventListener('click', event => { const tab = event.target.closest('button')?.dataset.tab; if (tab) { state.tab = tab; state.table = false; render(); scrollTo(0, 0); } });
+// Used by the screen recorder and handy in the console.
+window.study = {setTab: tab => { state.tab = tab; state.table = false; render(); scrollTo(0, 0); }, setWindow: w => { state.window = w; render(); }, setGroup: g => { state.group = g; render(); }, setTable: on => { state.table = Boolean(on); render(); }, state};
+
+fetch('/api/results').then(async response => {
+  if (!response.ok) { $('#status').textContent = 'No study yet'; $('#main').replaceChildren(el('div', {class: 'empty'}, 'No study has been run yet. In the terminal: ', el('code', {text: 'node src/study.mjs'}))); return; }
+  state.data = await response.json();
+  $('#status').textContent = `Data read ${stamp(state.data.takenAt.boards)}`;
+  if (state.data.usage) { $('#costPill').hidden = false; $('#costTotal').textContent = state.data.usage.credits.toLocaleString('en-US'); }
+  render();
+}).catch(error => { $('#status').textContent = 'Could not load'; $('#main').replaceChildren(el('div', {class: 'empty', text: error.message})); });
+</script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "polymarket-trader-analysis",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "test": "node --test src/engine.test.mjs",
+    "study": "node src/study.mjs",
+    "report": "node src/study.mjs --report",
+    "dashboard": "node src/server.mjs"
+  }
+}
