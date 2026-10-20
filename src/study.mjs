@@ -1,5 +1,5 @@
 // Runs the study against Predictefy and saves every response it used under data/.
-//   node src/study.mjs            the whole study, at settings that fit the free plan
+//   node src/study.mjs            larger collection; plan requirements and costs apply
 //   node src/study.mjs --quick    the eight leaderboards only (8 credits), printed and not saved
 //   node src/study.mjs --report   rebuild data/results.json from the saved responses (0 credits)
 // Options: --pages=15 (feed pages per label)  --markets=2500 (markets to look up)  --books=10  --rpm=50  --resume
@@ -36,8 +36,9 @@ function report() {
   printBoards(boards.boards);
   const e = results.entry;
   if (e) {
-    say(`ENTRY  | ${e.all.buys.toLocaleString('en-US')} buys from ${e.all.wallets.toLocaleString('en-US')} wallets, ${e.all.settledBuys.toLocaleString('en-US')} in markets that are decided`);
-    for (const g of e.groups) say(`ENTRY  | ${g.id.padEnd(12)} | ${String(g.settledBuys).padStart(6)} decided buys | paid ${usd(g.settledCost).padStart(11)} | got back ${usd(g.payout).padStart(11)} | ${g.returnPct === null ? 'n/a' : `${g.returnPct >= 0 ? '+' : ''}${g.returnPct.toFixed(1)}%`}`);
+    say('ENTRY  | Incomplete terminal-price proxy; not confirmed settlement or realised wallet profit.');
+    say(`ENTRY  | ${e.all.buys.toLocaleString('en-US')} buys from ${e.all.wallets.toLocaleString('en-US')} wallets, ${e.all.settledBuys.toLocaleString('en-US')} assigned a near-terminal price proxy`);
+    for (const g of e.groups) say(`ENTRY  | ${g.id.padEnd(12)} | ${String(g.settledBuys).padStart(6)} proxy-scored buys | paid ${usd(g.settledCost).padStart(11)} | proxy value ${usd(g.payout).padStart(11)} | ${g.returnPct === null ? 'n/a' : `${g.returnPct >= 0 ? '+' : ''}${g.returnPct.toFixed(1)}%`}`);
   }
   say(`SAVED  | ${file('results.json')}`);
   return results;
