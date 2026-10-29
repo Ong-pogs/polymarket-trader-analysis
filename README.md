@@ -1,6 +1,6 @@
 # Polymarket Trader Analysis with the Predictefy API
 
-Compare the fifty busiest wallets with the fifty biggest earners using the [Predictefy Prediction Market API](https://predictefy.com/en/api?utm_source=github&utm_medium=repo&utm_campaign=trader-analysis&utm_content=readme). Inspect how the time window, selection rule and remaining positions change the apparent result.
+Compare the fifty busiest wallets with the fifty biggest earners using the [Predictefy Prediction Market API](https://predictefy.com/en/prediction-market-api?utm_source=github&utm_medium=repo&utm_campaign=trader-analysis&utm_content=readme). Inspect how the time window, selection rule and remaining positions change the apparent result.
 
 This is a read-only local study. It never connects a wallet or places an order.
 
@@ -72,7 +72,7 @@ Run `npm test` to execute the 19 analysis tests without an API key or network ca
 - [API errors](https://docs.predictefy.com/guides/errors/)
 - [API best practices](https://docs.predictefy.com/guides/best-practices/)
 - [How to use an LLM to analyse prediction markets](https://blog.predictefy.com/how-to-use-an-llm-to-analyze-prediction-markets)
-- [Predictefy API](https://predictefy.com/en/api?utm_source=github&utm_medium=repo&utm_campaign=trader-analysis&utm_content=resources)
+- [Predictefy API](https://predictefy.com/en/prediction-market-api?utm_source=github&utm_medium=repo&utm_campaign=trader-analysis&utm_content=resources)
 
 API questions: [Predictefy Discord](https://discord.gg/KVrWkhD8S).
 
